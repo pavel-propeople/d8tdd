@@ -1,0 +1,19 @@
+{
+    "name": "mpndev/d8tdd",
+    "description": "Help with Drupal 8 TDD...",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin Nikolov",
+            "email": "martin.nikolov@ffwagency.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.2.0"
+    },
+    "autoload": {
+        "psr-4": { "MPNDEV\\": "src/" }
+    }
+}
