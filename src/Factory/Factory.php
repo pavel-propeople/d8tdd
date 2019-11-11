@@ -1,6 +1,6 @@
 <?php
 
-namespace Factory;
+namespace MPNDEV\D8TDD\Factory;
 
 class Factory {
 

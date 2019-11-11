@@ -1,6 +1,6 @@
 <?php
 
-namespace Http;
+namespace MPNDEV\D8TDD\Http;
 
 use Symfony\Component\HttpFoundation\Request;
 
