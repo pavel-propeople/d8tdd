@@ -2,9 +2,9 @@
 
 namespace MPNDEV\D8TDD;
 
-use Factory\Factory;
+use MPNDEV\D8TDD\Factory\Factory;
 use \Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
-use Http\JsonRequest;
+use MPNDEV\D8TDD\Http\JsonRequest;
 
 abstract class KernelTestBase extends EntityKernelTestBase {
 
