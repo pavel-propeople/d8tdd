@@ -17,7 +17,7 @@
         <br>
 
 ```php
-<?php
+<!-- <?php -->
 
 $this->factory(Node::class)->make();
 
