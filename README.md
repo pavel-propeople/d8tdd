@@ -6,8 +6,15 @@
 <p>First you need to create an abstract class that extends KernelTestBase class. KernelTestBase lives in this library.</p>
 <ul>
     <li>From terminal, go to the root directory of your Drupal installation;</li>
-    <li>Let's say you have module "my_module". Execute the following command:<br>
-        <code>php ./vendor/mpndev/d8tdd/src/generate.php make:kerneltest MyModule</code><br>
+    <li style="color:#008000">Let's say you have module "my_module". Execute the following command:
+<br>
+<br>
+    
+```
+php ./vendor/mpndev/d8tdd/src/generate.php make:kerneltest MyModule
+```
+
+<br>
         <small>(use the name of your module in PascalCase!)</small>
         <p>This will scaffold the abstract class for you.</p>
     </li>
