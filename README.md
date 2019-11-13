@@ -1,4 +1,4 @@
-<h1 color="green">You want to test Drupal-8.*</h1>
+<h1>You want to test Drupal-8.*</h1>
 <p>Now that's a very challenging task! For every test you need to write tons and tons of preparation code.</p>
 <br/>
 <h2>Here are some helpful tools!</h2>
