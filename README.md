@@ -17,7 +17,7 @@
         <br>
 
 ```php
-<!-- <?php -->
+<?php
 
 $this->factory(Node::class)->make();
 
@@ -38,7 +38,8 @@ $this->jsonRequest($url)->using('POST')->send();
 <p>Open MyModuleKernelTestBase.php and add the fallowing in the setUp method</p>
 <br>
 
-```
+```php
+<?php
 
 $this->factory(Node::class)->define('project', [
   'type' => 'project',
@@ -53,7 +54,8 @@ $this->factory(Node::class)->define('project', [
 <p>When you need to make instance of "project" in your tests do:</p>
 <br>
 
-```
+```php
+<?php
 
 $project = $this->factory(Node::class)->make('project');
 
@@ -71,7 +73,8 @@ $project->get('title')->getString();  // will return 'Some Project Title'
 <p>You can override and add fields on the fly:</p>
 <br>
 
-```
+```php
+<?php
 
 $project = $this->factory(Node::class)->make('project', [
   'title' => 'Some Another Title'
@@ -94,7 +97,8 @@ $project->get('field_something')->getString();  // will return 'Something'
 <p>You can also make multiple instances of "project" like this:</p>
 <br>
 
-```
+```php
+<?php
 
 $projects = $this->factory(Node::class, 15)->make('project');
 
@@ -108,7 +112,8 @@ $projects = $this->factory(Node::class, 15)->make('project');
 <p>If you use "create" instead of "make", factory will save the "project" in database:</p>
 <br>
 
-```
+```php
+<?php
 
 $this->factory(Node::class)->create('project');
 
@@ -120,7 +125,8 @@ $this->factory(Node::class)->create('project');
 <p>You can "make" "project" and save it later (normal Drupal staff):</p>
 <br>
 
-```
+```php
+<?php
 
 $project = $this->factory(Node::class)->make('project');
 
@@ -136,7 +142,8 @@ $project->save()
 <p>You can access "project" with closure like a third argument of "make" or "create" methods to make modifications like attaching something to reference field:</p>
 <br>
 
-```
+```php
+<?php
 
 /**
  * make
@@ -170,7 +177,8 @@ $project = $this->factory(Node::class)->create('project', [], function($project_
 <p>The request will not go outside. Instead, will be handled from the drupal kernel, and the response can be inspected. Nice isn't it?</p>
 <br>
 
-```
+```php
+<?php
 
 $response = $this->jsonRequest('http://localhost/some/endpoint')
   ->using('GET')
@@ -180,7 +188,8 @@ $response = $this->jsonRequest('http://localhost/some/endpoint')
 
 <br>
 
-```
+```php
+<?php
 
 $response = $this->jsonRequest('http://localhost/some/endpoint')
   ->using('POST')
@@ -190,7 +199,8 @@ $response = $this->jsonRequest('http://localhost/some/endpoint')
 
 <br>
 
-```
+```php
+<?php
 
 $response = $this->jsonRequest('http://localhost/some/endpoint')
   ->using('PUT')
@@ -200,7 +210,8 @@ $response = $this->jsonRequest('http://localhost/some/endpoint')
 
 <br>
 
-```
+```php
+<?php
 
 $response = $this->jsonRequest('http://localhost/some/endpoint')
   ->using('PATCH')
@@ -210,7 +221,8 @@ $response = $this->jsonRequest('http://localhost/some/endpoint')
 
 <br>
 
-```
+```php
+<?php
 
 $response = $this->jsonRequest('http://localhost/some/endpoint')
   ->using('DELETE')
@@ -224,7 +236,8 @@ $response = $this->jsonRequest('http://localhost/some/endpoint')
 <p>Attach cookie:</p>
 <br>
 
-```
+```php
+<?php
 
 $response = $this->jsonRequest('http://localhost/some/endpoint')
   ->using('POST')
@@ -239,7 +252,8 @@ $response = $this->jsonRequest('http://localhost/some/endpoint')
 <p>Attach content:</p>
 <br>
 
-```
+```php
+<?php
 
 $response = $this->jsonRequest('http://localhost/some/endpoint')
   ->using('POST')
@@ -253,7 +267,8 @@ $response = $this->jsonRequest('http://localhost/some/endpoint')
 <br>
 <p>Attach server:</p>
 
-```
+```php
+<?php
 
 $response = $this->jsonRequest('http://localhost/some/endpoint')
   ->using('POST')
@@ -267,7 +282,8 @@ $response = $this->jsonRequest('http://localhost/some/endpoint')
 <br>
 <p>Attach files:</p>
 
-```
+```php
+<?php
 
 $response = $this->jsonRequest('http://localhost/some/endpoint')
   ->using('POST')
