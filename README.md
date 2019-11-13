@@ -1,3 +1,6 @@
+<script>
+alert('hello');
+</script>
 <h1>You want to test Drupal-8.*</h1>
 <p>Very challenging task. For Every test you need to write tons and tons of preparation code.</p>
 <br/>
