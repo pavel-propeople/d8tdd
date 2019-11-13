@@ -6,7 +6,7 @@
 <p>First you need to create an abstract class that extends KernelTestBase class. KernelTestBase lives in this library.</p>
 <ul>
     <li>From terminal, go to the root directory of your Drupal installation;</li>
-    <li color="#008000">Let's say you have module "my_module". Execute the following command:
+    <li color="green">Let's say you have module "my_module". Execute the following command:
 <br>
 <br>
     
