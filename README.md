@@ -24,7 +24,6 @@ php ./vendor/mpndev/d8tdd/src/generate.php make:kerneltest MyModule
         <br>
 
 ```php
-<?php
 
 $this->factory(Node::class)->make();
 
