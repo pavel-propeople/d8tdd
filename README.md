@@ -1,6 +1,3 @@
-<script>
-alert('hello');
-</script>
 <h1>You want to test Drupal-8.*</h1>
 <p>Very challenging task. For Every test you need to write tons and tons of preparation code.</p>
 <br/>
@@ -18,16 +15,17 @@ alert('hello');
     <li>This will give you the power of "factory" and "jsonRequest" functionality:
         <br>
         <br>
-        <code>
-        $this->factory(Node::class)->make();
-        </code>
-        <br>
-        <code>
-        $this->jsonRequest($url)->using('POST')->send();
-        </code>
-        <br>
-        <br>
-        <small>(below we have examples for using this tools in your testing code...)</small>
+
+```php
+<?php
+
+$this->factory(Node::class)->make();
+
+$this->jsonRequest($url)->using('POST')->send();
+
+```
+
+<small>(below we have examples for using this tools in your testing code...)</small>
     </li>
 </ul>
 <hr>
@@ -39,32 +37,32 @@ alert('hello');
 <p>Let assume we need Node instance from bundle "project". The very first thing is to define factory for default "project" implementation.</p>
 <p>Open MyModuleKernelTestBase.php and add the fallowing in the setUp method</p>
 <br>
-<code>$this->factory(Node::class)->define('project', [
-<br>
-&nbsp&nbsp;'type' => 'project',
-<br>
-&nbsp;&nbsp;'title' => 'Some Project Title'
-<br>
-]);</code>
-<br>
+
+```
+
+$this->factory(Node::class)->define('project', [
+  'type' => 'project',
+  'title' => 'Some Project Title'
+]);
+
+```
+
 <br>
 <hr>
 <br>
 <p>When you need to make instance of "project" in your tests do:</p>
 <br>
-<code>
+
+```
+
 $project = $this->factory(Node::class)->make('project');
-</code>
-<br>
-<code>
-$project->bundle();
-</code> // will return 'project'
-<br>
-<code>
-$project->get('title')->getString();
-</code> // will return 'Some Project Title'
-<br>
-<br>
+
+$project->bundle();  // will return 'project'
+
+$project->get('title')->getString();  // will return 'Some Project Title'
+
+```
+
 <br>
 <p>$project will be fresh content type of bundle "project"</p>
 <br>
@@ -72,25 +70,22 @@ $project->get('title')->getString();
 <br>
 <p>You can override and add fields on the fly:</p>
 <br>
-<code>
-$project = $this->factory(Node::class)->make('project', [<br>
-&nbsp;&nbsp;'title' => 'Some Another Title'<br>
-&nbsp;&nbsp;'field_something' => 'Something'<br>
+
+```
+
+$project = $this->factory(Node::class)->make('project', [
+  'title' => 'Some Another Title'
+  'field_something' => 'Something'
 ]);
-</code>
-<br>
-<code>
-$project->bundle();
-</code> // will return 'project'
-<br>
-<code>
-$project->get('title')->getString();
-</code> // will return 'Some Another Title'
-<br>
-<code>
-$project->get('field_something')->getString();
-</code> // will return 'Something'
-<br>
+
+$project->bundle();  // will return 'project'
+
+$project->get('title')->getString();  // will return 'Some Another Title'
+
+$project->get('field_something')->getString();  // will return 'Something'
+
+```
+
 <br>
 <p>This will override default behavior of the factory for bundle "project"</p>
 <br>
@@ -98,8 +93,13 @@ $project->get('field_something')->getString();
 <br>
 <p>You can also make multiple instances of "project" like this:</p>
 <br>
-<code>$projects = $this->factory(Node::class, 15)->make('project');</code>
-<br>
+
+```
+
+$projects = $this->factory(Node::class, 15)->make('project');
+
+```
+
 <br>
 <p>That will give you array of 15 "projects".</p>
 <br>
@@ -107,37 +107,59 @@ $project->get('field_something')->getString();
 <br>
 <p>If you use "create" instead of "make", factory will save the "project" in database:</p>
 <br>
-<code>$this->factory(Node::class)->create('project');</code>
-<br>
+
+```
+
+$this->factory(Node::class)->create('project');
+
+```
+
 <br>
 <hr>
 <br>
 <p>You can "make" "project" and save it later (normal Drupal staff):</p>
 <br>
-<code>$project = $this->factory(Node::class)->make('project');</code>
-<br>
-<code>//Do some things...</code>
-<br>
-<code>$project->save()</code>
-<br>
+
+```
+
+$project = $this->factory(Node::class)->make('project');
+
+//Do some things...
+
+$project->save()
+
+```
+
 <br>
 <hr>
 <br>
 <p>You can access "project" with closure like a third argument of "make" or "create" methods to make modifications like attaching something to reference field:</p>
 <br>
-<code>$project = $this->factory(Node::class)->make('project', [], function($project_instance){<br>
-&nbsp;&nbsp;$project_instance->get('field_environments')->appendItem($this->factory(Paragraph::class)->create('environment'));<br>
-&nbsp;&nbsp;return $project_instance;<br>
-});</code><br><br>
-<code>$project = $this->factory(Node::class)->create('project', [], function($project_instance){<br>
-&nbsp;&nbsp;$project_instance->get('field_environments')->appendItem($this->factory(Paragraph::class)->create('environment'));<br>
-&nbsp;&nbsp;return $project_instance;<br>
-});</code>
-<br>
+
+```
+
+/**
+ * make
+ */
+$project = $this->factory(Node::class)->make('project', [], function($project_instance){
+  $project_instance->get('field_environments')->appendItem($this->factory(Paragraph::class)->create('environment'));
+  return $project_instance;
+});
+
+/**
+ * create
+ */
+$project = $this->factory(Node::class)->create('project', [], function($project_instance){
+  $project_instance->get('field_environments')->appendItem($this->factory(Paragraph::class)->create('environment'));
+  return $project_instance;
+});
+
+```
+
 <br>
 <h3>IMPORTANT!!!</h3>
-<p>- In closure, aways return the passed instance variable! (In our example $project_instance);</p>
-<p>- "appendItem()" method will expect saved instance in database for attached item! (In our example "environment", that was created on the fly, again with factory);</p>
+<p>- In closure, aways return the passed instance variable! (In our example <code>$project_instance</code>);</p>
+<p>- <code>appendItem()</code> method will expect saved instance in database for attached item! (In our example "environment", that was created on the fly, again with factory);</p>
 <br>
 <hr>
 <br>
@@ -147,44 +169,113 @@ $project->get('field_something')->getString();
 <p>Helper, that make available json request(with application/json header) for testing endpoints.</p>
 <p>The request will not go outside. Instead, will be handled from the drupal kernel, and the response can be inspected. Nice isn't it?</p>
 <br>
-<code>$response = $this->jsonRequest('http://localhost/some/endpoint')->using('GET')->send();</code>
+
+```
+
+$response = $this->jsonRequest('http://localhost/some/endpoint')
+  ->using('GET')
+  ->send();
+
+```
+
 <br>
+
+```
+
+$response = $this->jsonRequest('http://localhost/some/endpoint')
+  ->using('POST')
+  ->send();
+
+```
+
 <br>
-<code>$response = $this->jsonRequest('http://localhost/some/endpoint')->using('POST')->send();</code>
-<br><br>
-<code>$response = $this->jsonRequest('http://localhost/some/endpoint')->using('PUT')->send();</code>
+
+```
+
+$response = $this->jsonRequest('http://localhost/some/endpoint')
+  ->using('PUT')
+  ->send();
+
+```
+
 <br>
+
+```
+
+$response = $this->jsonRequest('http://localhost/some/endpoint')
+  ->using('PATCH')
+  ->send();
+
+```
+
 <br>
-<code>$response = $this->jsonRequest('http://localhost/some/endpoint')->using('PATCH')->send();</code>
-<br>
-<br>
-<code>$response = $this->jsonRequest('http://localhost/some/endpoint')->using('DELETE')->send();</code>
-<br>
+
+```
+
+$response = $this->jsonRequest('http://localhost/some/endpoint')
+  ->using('DELETE')
+  ->send();
+
+```
+
 <br>
 <hr>
 <br>
 <p>Attach cookie:</p>
 <br>
-<code>$response = $this->jsonRequest('http://localhost/some/endpoint')->using('POST')->withCookie($some_cookie)->send();</code>
-<br>
+
+```
+
+$response = $this->jsonRequest('http://localhost/some/endpoint')
+  ->using('POST')
+  ->withCookie($some_cookie)
+  ->send();
+
+```
+
 <br>
 <hr>
 <br>
 <p>Attach content:</p>
-<code>$response = $this->jsonRequest('http://localhost/some/endpoint')->using('POST')->withContent($some_content)->send();</code>
 <br>
+
+```
+
+$response = $this->jsonRequest('http://localhost/some/endpoint')
+  ->using('POST')
+  ->withContent($some_content)
+  ->send();
+
+```
+
 <br>
 <hr>
 <br>
 <p>Attach server:</p>
-<code>$response = $this->jsonRequest('http://localhost/some/endpoint')->using('POST')->withServer($some_server)->send();</code>
-<br>
+
+```
+
+$response = $this->jsonRequest('http://localhost/some/endpoint')
+  ->using('POST')
+  ->withServer($some_server)
+  ->send();
+
+```
+
 <br>
 <hr>
 <br>
 <p>Attach files:</p>
-<code>$response = $this->jsonRequest('http://localhost/some/endpoint')->using('POST')->withFiles($some_files)->send();</code>
-<br>
+
+```
+
+$response = $this->jsonRequest('http://localhost/some/endpoint')
+  ->using('POST')
+  ->withFiles($some_files)
+  ->send();
+
+```
+
 <br>
 <hr>
 <br>
