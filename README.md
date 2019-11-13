@@ -1,4 +1,4 @@
-<h1>You want to test Drupal-8.*</h1>
+<h1 color="green">You want to test Drupal-8.*</h1>
 <p>Now that's a very challenging task! For every test you need to write tons and tons of preparation code.</p>
 <br/>
 <h2>Here are some helpful tools!</h2>
@@ -6,7 +6,7 @@
 <p>First you need to create an abstract class that extends KernelTestBase class. KernelTestBase lives in this library.</p>
 <ul>
     <li>From terminal, go to the root directory of your Drupal installation;</li>
-    <li color="green">Let's say you have module "my_module". Execute the following command:
+    <li>Let's say you have module "my_module". Execute the following command:
 <br>
 <br>
     
